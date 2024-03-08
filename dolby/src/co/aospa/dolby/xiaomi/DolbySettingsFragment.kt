@@ -18,7 +18,7 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceChangeListener
 import androidx.preference.PreferenceFragment
-import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.dlog
 import co.aospa.dolby.xiaomi.R
 import com.android.settingslib.widget.MainSwitchPreference
@@ -42,16 +42,16 @@ class DolbySettingsFragment : PreferenceFragment(),
         findPreference<ListPreference>(DolbyConstants.PREF_DIALOGUE)!!
     }
     private val bassPref by lazy {
-        findPreference<SwitchPreference>(DolbyConstants.PREF_BASS)!!
+        findPreference<SwitchPreferenceCompat>(DolbyConstants.PREF_BASS)!!
     }
     private val hpVirtPref by lazy {
-        findPreference<SwitchPreference>(DolbyConstants.PREF_HP_VIRTUALIZER)!!
+        findPreference<SwitchPreferenceCompat>(DolbyConstants.PREF_HP_VIRTUALIZER)!!
     }
     private val spkVirtPref by lazy {
-        findPreference<SwitchPreference>(DolbyConstants.PREF_SPK_VIRTUALIZER)!!
+        findPreference<SwitchPreferenceCompat>(DolbyConstants.PREF_SPK_VIRTUALIZER)!!
     }
     private val volumePref by lazy {
-        findPreference<SwitchPreference>(DolbyConstants.PREF_VOLUME)!!
+        findPreference<SwitchPreferenceCompat>(DolbyConstants.PREF_VOLUME)!!
     }
     private val resetPref by lazy {
         findPreference<Preference>(DolbyConstants.PREF_RESET)!!
