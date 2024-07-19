@@ -23,7 +23,7 @@ internal class DolbyController private constructor(
     private val context: Context
 ) {
     private var dolbyEffect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
-    private val audioManager = context.getSystemService(AudioManager::class.java)
+    private val audioManager = context.getSystemService(AudioManager::class.java)!!
     private val handler = Handler(context.mainLooper)
 
     // Restore current profile on every media session
@@ -118,14 +118,14 @@ internal class DolbyController private constructor(
         dlog(TAG, "restoreSettings(profile=$profile)")
         val prefs = context.getSharedPreferences("profile_$profile", Context.MODE_PRIVATE)
         setPreset(
-            prefs.getString(DolbyConstants.PREF_PRESET, getPreset(profile)),
+            prefs.getString(DolbyConstants.PREF_PRESET, getPreset(profile))!!,
             profile
         )
         setIeqPreset(
             prefs.getString(
                 DolbyConstants.PREF_IEQ,
                 getIeqPreset(profile).toString()
-            ).toInt(),
+            )!!.toInt(),
             profile
         )
         setHeadphoneVirtEnabled(
@@ -140,14 +140,14 @@ internal class DolbyController private constructor(
             prefs.getString(
                 DolbyConstants.PREF_STEREO,
                 getStereoWideningAmount(profile).toString()
-            ).toInt(),
+            )!!.toInt(),
             profile
         )
         setDialogueEnhancerAmount(
             prefs.getString(
                 DolbyConstants.PREF_DIALOGUE,
                 getDialogueEnhancerAmount(profile).toString()
-            ).toInt(),
+            )!!.toInt(),
             profile
         )
         setBassEnhancerEnabled(
@@ -171,7 +171,7 @@ internal class DolbyController private constructor(
     private fun setCurrentProfile() {
         dlog(TAG, "setCurrentProfile")
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        profile = prefs.getString(DolbyConstants.PREF_PROFILE, "0" /*dynamic*/).toInt()
+        profile = prefs.getString(DolbyConstants.PREF_PROFILE, "0" /*dynamic*/)!!.toInt()
     }
 
     fun setDsOnAndPersist(dsOn: Boolean) {
