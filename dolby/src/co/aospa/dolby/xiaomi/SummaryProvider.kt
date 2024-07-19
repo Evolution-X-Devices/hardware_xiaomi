@@ -58,6 +58,7 @@ class SummaryProvider : ContentProvider() {
     ): Int = 0
 
     private fun getDolbySummary(): String {
+        val context = context!!
         val dolbyController = DolbyController.getInstance(context)
         if (!dolbyController.dsOn) {
             return context.getString(R.string.dolby_off)
