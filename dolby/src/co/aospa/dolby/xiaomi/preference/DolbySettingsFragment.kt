@@ -75,7 +75,7 @@ class DolbySettingsFragment : PreferenceFragment(),
     }
 
     private val dolbyController by lazy { DolbyController.getInstance(context) }
-    private val audioManager by lazy { context.getSystemService(AudioManager::class.java) }
+    private val audioManager by lazy { context.getSystemService(AudioManager::class.java)!! }
     private val handler = Handler()
 
     private var isOnSpeaker = true
