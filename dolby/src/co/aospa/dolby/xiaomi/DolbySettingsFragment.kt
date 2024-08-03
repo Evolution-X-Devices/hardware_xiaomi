@@ -33,7 +33,7 @@ class DolbySettingsFragment : PreferenceFragment(),
         findPreference<ListPreference>(DolbyConstants.PREF_PROFILE)!!
     }
     private val presetPref by lazy {
-        findPreference<ListPreference>(DolbyConstants.PREF_PRESET)!!
+        findPreference<Preference>(DolbyConstants.PREF_PRESET)!!
     }
     private val stereoPref by lazy {
         findPreference<ListPreference>(DolbyConstants.PREF_STEREO)!!
@@ -105,7 +105,6 @@ class DolbySettingsFragment : PreferenceFragment(),
             }
         }
 
-        presetPref.onPreferenceChangeListener = this
         hpVirtPref.onPreferenceChangeListener = this
         spkVirtPref.onPreferenceChangeListener = this
         stereoPref.onPreferenceChangeListener = this
@@ -135,6 +134,11 @@ class DolbySettingsFragment : PreferenceFragment(),
         super.onDestroyView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateProfileSpecificPrefs()
+    }
+
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         dlog(TAG, "onPreferenceChange: key=${preference.key} value=$newValue")
         when (preference.key) {
@@ -143,10 +147,6 @@ class DolbySettingsFragment : PreferenceFragment(),
                 dolbyController.profile = profile
                 (preferenceManager.preferenceDataStore as DolbyPreferenceStore).profile = profile
                 updateProfileSpecificPrefs()
-            }
-
-            DolbyConstants.PREF_PRESET -> {
-                dolbyController.setPreset(newValue.toString())
             }
 
             DolbyConstants.PREF_SPK_VIRTUALIZER -> {
@@ -213,15 +213,7 @@ class DolbySettingsFragment : PreferenceFragment(),
 
         if (!enable) return
 
-        val preset = dolbyController.getPreset(currentProfile)
-        presetPref.apply {
-            if (entryValues.contains(preset)) {
-                summary = "%s"
-                value = preset
-            } else {
-                summary = unknownRes
-            }
-        }
+        presetPref.summary = dolbyController.getPresetName()
 
         val deValue = dolbyController.getDialogueEnhancerAmount(currentProfile).toString()
         dialoguePref.apply {
