@@ -8,8 +8,18 @@ package co.aospa.euicc
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.content.pm.PackageManager.PackageInfoFlags
 import android.util.Log
+import java.lang.reflect.Method
+
+object SystemProperties {
+    private val systemPropertiesClass: Class<*> = Class.forName("android.os.SystemProperties")
+    private val getMethod: Method = systemPropertiesClass.getMethod("get", String::class.java)
+
+    fun get(property: String): String {
+        return getMethod.invoke(null, property) as String
+    }
+}
 
 object EuiccDisabler {
     private const val TAG = "XiaomiEuiccDisabler"
