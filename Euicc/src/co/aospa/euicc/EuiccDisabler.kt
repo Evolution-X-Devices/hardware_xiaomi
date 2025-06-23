@@ -35,19 +35,26 @@ object EuiccDisabler {
     )
 
     private fun isInstalled(pm: PackageManager, pkgName: String) = runCatching {
-        val info = pm.getApplicationInfo(pkgName, ApplicationInfoFlags.of(0))
-        info.flags and ApplicationInfo.FLAG_INSTALLED != 0
+        val info = pm.getPackageInfo(pkgName, PackageInfoFlags.of(0))
+        info.applicationInfo!!.flags and ApplicationInfo.FLAG_INSTALLED != 0
     }.getOrDefault(false)
 
     private fun isInstalledAndEnabled(pm: PackageManager, pkgName: String) = runCatching {
-        val info = pm.getApplicationInfo(pkgName, ApplicationInfoFlags.of(0))
-        Log.d(TAG, "package $pkgName installed, enabled = ${info.enabled}")
-        info.enabled
+        val info = pm.getPackageInfo(pkgName, PackageInfoFlags.of(0))
+        Log.d(TAG, "package $pkgName installed, enabled = ${info.applicationInfo?.enabled}")
+        info.applicationInfo?.enabled
     }.getOrDefault(false)
 
     fun enableOrDisableEuicc(context: Context) {
         val pm = context.packageManager
-        val disable = EUICC_DEPENDENCIES.any { !isInstalledAndEnabled(pm, it) }
+        val sku = SystemProperties.get("ro.boot.product.hardware.sku")
+        val disable = if (sku == "CN") {
+            Log.d(TAG, "Disabling apps due toCN SKU")
+            true // Disable if SKU is CN
+        } else {
+            EUICC_DEPENDENCIES.any {
+               !(isInstalledAndEnabled(pm, it) ?: false) }
+        }
         val flag = if (disable) {
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED
         } else {
