@@ -6,18 +6,20 @@
 
 android_app {
     name: "XiaomiEuicc",
-    srcs: ["src/**/*.kt"],
-    sdk_version: "current",
-    product_specific: true,
     certificate: "platform",
+    srcs: ["src/**/*.kt"],
+    platform_apis: true,
     privileged: true,
-
-    optimize: {
-        proguard_flags_files: ["proguard.flags"],
-    },
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.core_core",
+        "androidx.preference_preference",
+        "SettingsLib",
+        "qcrilhook",
+    ],
     required: [
-        "co.aospa.euicc.xml",
-        "hidden-api-whitelist-co.aospa.euicc.xml",
+        "hidden-api-whitelist-com.xiaomi.settings.xml",
+        "privapp_whitelist_com.xiaomi.settings.xml",
         "EuiccGoogle",
     ],
 }
@@ -39,34 +41,51 @@ android_app_import {
     ],
 }
 
+dex_import {
+    name: "mirilhook",
+    owner: "xiaomi",
+    jars: [
+        "proprietary/system_ext/framework/mirilhook.jar",
+    ],
+    system_ext_specific: true,
+}
+
+dex_import {
+    name: "qcrilhook",
+    owner: "xiaomi",
+    jars: [
+        "proprietary/system_ext/framework/qcrilhook.jar",
+    ],
+    system_ext_specific: true,
+}
+
 prebuilt_etc {
     name: "default-permissions-euicc.xml",
-    relative_install_path: "default-permissions",
     filename: "default-permissions-euicc.xml",
-    src: "default-permissions-euicc.xml",
+    src: "permissions/default-permissions-euicc.xml",
+    sub_dir: "default-permissions",
     product_specific: true,
 }
 
 prebuilt_etc {
     name: "privapp-permissions-euiccgoogle.xml",
-    relative_install_path: "permissions",
     filename: "privapp-permissions-euiccgoogle.xml",
-    src: "privapp-permissions-euiccgoogle.xml",
+    src: "permissions/privapp-permissions-euiccgoogle.xml",
+    sub_dir: "permissions",
     product_specific: true,
 }
 
 prebuilt_etc {
-    name: "co.aospa.euicc.xml",
-    relative_install_path: "permissions",
-    filename: "co.aospa.euicc.xml",
-    src: "co.aospa.euicc.xml",
-    product_specific: true,
+    name: "hidden-api-whitelist-com.xiaomi.settings.xml",
+    filename: "hidden-api-whitelist-com.xiaomi.settings.xml",
+    src: "permissions/hidden-api-whitelist-com.xiaomi.settings.xml",
+    sub_dir: "sysconfig",
+    system_ext_specific: true,
 }
 
 prebuilt_etc {
-    name: "hidden-api-whitelist-co.aospa.euicc.xml",
-    relative_install_path: "sysconfig",
-    filename: "hidden-api-whitelist-co.aospa.euicc.xml",
-    src: "hidden-api-whitelist-co.aospa.euicc.xml",
-    product_specific: true,
+    name: "privapp_whitelist_com.xiaomi.settings.xml",
+    src: "permissions/privapp_whitelist_com.xiaomi.settings.xml",
+    sub_dir: "permissions",
+    system_ext_specific: true,
 }
