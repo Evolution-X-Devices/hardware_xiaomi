@@ -25,7 +25,7 @@ class EsimController private constructor(private val context: Context) {
         private const val TAG = "EsimController"
         private val DEBUG = Log.isLoggable(TAG, Log.DEBUG)
 
-        private const val DEVICE_ESIM_SUPPORT_LIST = "diting,ziyi,nuwa,fuxi"
+        private const val DEVICE_ESIM_SUPPORT_LIST = "diting,ziyi,nuwa,fuxi,garnet"
         private const val PROPERTY_DEVICE_INFO_HW = "ro.boot.hwc"
         private const val PROPERTY_DEVICE_NAME = "ro.product.device"
 
