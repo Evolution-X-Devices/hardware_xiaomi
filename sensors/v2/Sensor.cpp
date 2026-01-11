@@ -265,9 +265,7 @@ SysfsPollingOneShotSensor::~SysfsPollingOneShotSensor() {
 }
 
 void SysfsPollingOneShotSensor::writeEnable(bool enable) {
-    std::call_once(mEnableOpenOnce, [&] {
-        mEnableStream.open(mEnablePath);
-    });
+    std::call_once(mEnableOpenOnce, [&] { mEnableStream.open(mEnablePath); });
 
     if (mEnableStream) {
         mEnableStream << (enable ? '1' : '0') << std::flush;

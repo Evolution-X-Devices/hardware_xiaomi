@@ -43,7 +43,7 @@ namespace implementation {
 
 class ISensorsEventCallback {
   public:
-    virtual ~ISensorsEventCallback(){};
+    virtual ~ISensorsEventCallback() {};
     virtual void postEvents(const std::vector<Event>& events, bool wakeup) = 0;
 };
 

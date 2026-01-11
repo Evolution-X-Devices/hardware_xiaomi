@@ -147,9 +147,9 @@ Return<void> HalProxy::getSensorsList_2_1(ISensorsV2_1::getSensorsList_2_1_cb _h
 Return<void> HalProxy::getSensorsList(ISensorsV2_0::getSensorsList_cb _hidl_cb) {
     std::vector<V1_0::SensorInfo> sensors;
     for (const auto& iter : mSensors) {
-      if (iter.second.type != SensorType::HINGE_ANGLE) {
-        sensors.push_back(convertToOldSensorInfo(iter.second));
-      }
+        if (iter.second.type != SensorType::HINGE_ANGLE) {
+            sensors.push_back(convertToOldSensorInfo(iter.second));
+        }
     }
     _hidl_cb(sensors);
     return Void();
@@ -735,8 +735,7 @@ void HalProxy::decrementRefCountAndMaybeReleaseWakelock(size_t delta,
     if (!mThreadsRun.load()) return;
     std::lock_guard<std::recursive_mutex> lockGuard(mWakelockMutex);
     if (delta > mWakelockRefCount) {
-        ALOGE("Decrementing wakelock ref count by %zu when count is %zu",
-              delta, mWakelockRefCount);
+        ALOGE("Decrementing wakelock ref count by %zu when count is %zu", delta, mWakelockRefCount);
     }
     if (timeoutStart == -1) timeoutStart = mWakelockTimeoutResetTime;
     if (mWakelockRefCount == 0 || timeoutStart < mWakelockTimeoutResetTime) return;
