@@ -9,7 +9,9 @@
             \"sim-slot-mappings\": [
                 {
                     \"devices\": [
+                        \"XIG05\",
                         \"fuxi\",
+                        \"garnet\",
                         \"nuwa\"
                     ],
                     \"esim-slot-ids\": [
@@ -27,7 +29,9 @@
             \"sim_illustration_lottie_mappings\": [
                 {
                     \"devices\": [
+                        \"XIG05\",
                         \"fuxi\",
+                        \"garnet\",
                         \"nuwa\"
                     ],
                     \"illustration_lottie\": \"sim_illustration_lottie_bottom\"
