@@ -23,13 +23,19 @@ class BootCompletedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (DEBUG) Log.d(TAG, "Received boot completed intent: ${intent.action}")
         if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            val hasEuiccFeature =
-                context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC)
-            Log.i(TAG, "eSIM supported: $hasEuiccFeature")
+            val hasNonRemovableEuicc =
+                context.resources
+                    .getIntArray(com.android.internal.R.array.non_removable_euicc_slots)
+                    .isNotEmpty()
+            Log.i(TAG, "eSIM supported: $hasNonRemovableEuicc")
 
-            setComponentEnabled(context, EsimSettingsActivity::class.java.name, hasEuiccFeature)
+            setComponentEnabled(
+                context,
+                EsimSettingsActivity::class.java.name,
+                hasNonRemovableEuicc,
+            )
 
-            if (hasEuiccFeature) {
+            if (hasNonRemovableEuicc) {
                 EsimController.getInstance(context).onBootCompleted()
             }
         }
