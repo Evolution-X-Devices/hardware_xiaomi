@@ -344,6 +344,14 @@
         </interface>
     </hal>
     <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hardware.aidl.mtdservice</name>
+        <version>1</version>
+        <interface>
+            <name>IMTService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
         <name>vendor.xiaomi.hardware.quickcamera</name>
         <interface>
             <name>IQuickCameraService</name>
