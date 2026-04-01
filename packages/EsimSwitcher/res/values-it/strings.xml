@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2023-2025 Paranoid Android
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Selettore eSIM</string>
+    <string name="esim_title">eSIM</string>
+    <string name="esim_enable_name">Attiva eSIM</string>
+    <string name="esim_warning_title">eSIM in uso</string>
+    <string name="esim_warning_message">Disabilita o rimuovi il profilo eSIM corrente prima di procedere</string>
+    <string name="esim_footer_note">Attivare la eSIM disabiliterà la seconda SIM fisica</string>
+</resources>
