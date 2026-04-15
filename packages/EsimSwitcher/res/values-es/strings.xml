@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2023-2025 Paranoid Android
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">Conmutador de eSIM</string>
+    <string name="esim_title">eSIM</string>
+    <string name="esim_enable_name">Activar eSIM</string>
+    <string name="esim_warning_title">eSIM en uso</string>
+    <string name="esim_warning_message">Desactiva o elimina tu perfil de eSIM actual antes de continuar</string>
+</resources>
