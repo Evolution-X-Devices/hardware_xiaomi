@@ -6,10 +6,10 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.IBinder;
 
-import androidx.annotation.Nullable;
-
 public class VolumeListenerService extends Service {
-    @Nullable
+    private VolumeListenerReceiver mReceiver;
+    private boolean mReceiverRegistered;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -17,14 +17,37 @@ public class VolumeListenerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
-        registerReceiver(new VolumeListenerReceiver(), intentFilter);
+        if (!mReceiverRegistered) {
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction("android.media.VOLUME_CHANGED_ACTION");
+            mReceiver = new VolumeListenerReceiver();
+            registerReceiver(mReceiver, intentFilter);
+            mReceiverRegistered = true;
+        }
 
+        syncCurrentMusicVolume();
+
+        return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mReceiverRegistered && mReceiver != null) {
+            unregisterReceiver(mReceiver);
+            mReceiverRegistered = false;
+            mReceiver = null;
+        }
+
+        super.onDestroy();
+    }
+
+    private void syncCurrentMusicVolume() {
         AudioManager audioManager = getSystemService(AudioManager.class);
+        if (audioManager == null) {
+            return;
+        }
+
         int current = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         audioManager.setParameters("volume_change=" + current + ";flags=8");
-
-        return super.onStartCommand(intent, flags, startId);
     }
 }
