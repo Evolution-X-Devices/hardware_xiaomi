@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2023-2025 Paranoid Android
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">تعویض سیم‌کارت مجازی</string>
+    <string name="esim_warning_title">سیم‌کارت مجازی در کار</string>
+    <string name="esim_footer_note">فعال کردن سیم‌کارت مجازی باعث غیرفعال شدن درگاه سیم‌کارت فیزیکی دوم می‌شود.</string>
+</resources>
