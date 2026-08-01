@@ -7,5 +7,6 @@
 <resources>
     <string name="app_name">تعویض سیم‌کارت مجازی</string>
     <string name="esim_warning_title">سیم‌کارت مجازی در کار</string>
+    <string name="esim_warning_message">لطفاً قبل از ادامه، نمایه سیم کارت مجازی فعلی خود را غیرفعال یا حذف کنید</string>
     <string name="esim_footer_note">فعال کردن سیم‌کارت مجازی باعث غیرفعال شدن درگاه سیم‌کارت فیزیکی دوم می‌شود.</string>
 </resources>
