@@ -1,4 +1,12 @@
-aidl_interface {
+soong_config_module_type {
+    name: "xiaomi_touchfeature_aidl_interface",
+    module_type: "aidl_interface",
+    config_namespace: "xiaomi",
+    bool_variables: ["disable_touchfeature_aidl"],
+    properties: ["enabled"],
+}
+
+xiaomi_touchfeature_aidl_interface {
     name: "vendor.xiaomi.hw.touchfeature",
     vendor_available: true,
     srcs: [
@@ -24,4 +32,12 @@ aidl_interface {
         },
     ],
     frozen: true,
+    soong_config_variables: {
+        disable_touchfeature_aidl: {
+            enabled: false,
+            conditions_default: {
+                enabled: true,
+            },
+        },
+    },
 }
