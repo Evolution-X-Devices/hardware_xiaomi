@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2023-2025 Paranoid Android
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="app_name">eSIM-váltó</string>
+    <string name="esim_title">eSIM</string>
+    <string name="esim_enable_name">eSIM engedélyezése</string>
+    <string name="esim_warning_title">eSIM használatban van</string>
+    <string name="esim_warning_message">Kérjük, a folytatás előtt tiltsa le vagy távolítsa el jelenlegi eSIM-profilját.</string>
+    <string name="esim_footer_note">Az eSIM bekapcsolása automatikusan letiltja a második fizikai SIM-foglalatot</string>
+</resources>
