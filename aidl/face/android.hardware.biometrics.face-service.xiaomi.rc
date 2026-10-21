@@ -1,0 +1,8 @@
+on post-fs-data
+    mkdir /data/vendor/face 0700 system system
+    mkdir /data/vendor/face/st_auth 0700 system system
+
+service vendor.face-hal /vendor/bin/hw/android.hardware.biometrics.face-service.xiaomi
+    class late_start
+    user system
+    group system camera

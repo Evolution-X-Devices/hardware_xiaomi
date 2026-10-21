@@ -1,0 +1,43 @@
+//
+// SPDX-FileCopyrightText: 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+vintf_fragment {
+    name: "android.hardware.biometrics.face-service.xiaomi.xml",
+    src: "android.hardware.biometrics.face-service.xiaomi.xml",
+    vendor: true,
+}
+
+cc_binary {
+    name: "android.hardware.biometrics.face-service.xiaomi",
+    init_rc: ["android.hardware.biometrics.face-service.xiaomi.rc"],
+    vintf_fragment_modules: ["android.hardware.biometrics.face-service.xiaomi.xml"],
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: [
+        "AuthEngine.cpp",
+        "CameraSource.cpp",
+        "Face.cpp",
+        "Session.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "android.hardware.biometrics.common-V4-ndk",
+        "android.hardware.biometrics.face-V4-ndk",
+        "android.hardware.common-V2-ndk",
+        "android.hardware.keymaster-V4-ndk",
+        "libbase",
+        "libbinder_ndk",
+        "libcamera2ndk_vendor",
+        "libdl",
+        "liblog",
+        "libmediandk",
+        "libnativewindow",
+        "libziparchive",
+    ],
+    static_libs: [
+        "android.hardware.biometrics.common.thread",
+        "android.hardware.biometrics.common.util",
+    ],
+}
